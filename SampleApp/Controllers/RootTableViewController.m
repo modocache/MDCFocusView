@@ -25,6 +25,8 @@
 
 #import "RootTableViewController.h"
 
+#import "SpotlightViewController.h"
+
 
 static NSString * kRootTableViewCellIdentifier = @"RootTableViewCellIdentifier";
 
@@ -42,16 +44,27 @@ static NSString * kRootTableViewCellIdentifier = @"RootTableViewCellIdentifier";
 - (id)init {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-        _viewControllers = @[];
+        _viewControllers = @[ [SpotlightViewController class] ];
     }
     return self;
+}
+
+
+#pragma mark - UIViewController Overrides
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    for (NSIndexPath *indexPath in [self.tableView indexPathsForSelectedRows]) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 
 #pragma mark - UITableViewDataSource Protocol Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -65,6 +78,8 @@ static NSString * kRootTableViewCellIdentifier = @"RootTableViewCellIdentifier";
                                       reuseIdentifier:kRootTableViewCellIdentifier];
     }
 
+    cell.textLabel.text = NSStringFromClass([self.viewControllers objectAtIndex:indexPath.row]);
+
     return cell;
 }
 
@@ -72,7 +87,8 @@ static NSString * kRootTableViewCellIdentifier = @"RootTableViewCellIdentifier";
 #pragma mark - UITableViewDelegate Protocol Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@:%@", [self class], NSStringFromSelector(_cmd));
+    id viewController = [[self.viewControllers objectAtIndex:indexPath.row] new];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

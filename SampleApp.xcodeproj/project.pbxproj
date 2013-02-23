@@ -19,6 +19,7 @@
 		DA25505216D91EE600BB33EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA25503316D91EE500BB33EB /* Foundation.framework */; };
 		DA25505A16D91EE600BB33EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA25505816D91EE600BB33EB /* InfoPlist.strings */; };
 		DA25508416D921A900BB33EB /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508316D921A900BB33EB /* RootTableViewController.m */; };
+		DA25508716D9241400BB33EB /* SpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508616D9241400BB33EB /* SpotlightViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		DA25505916D91EE600BB33EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA25508216D921A900BB33EB /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
 		DA25508316D921A900BB33EB /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
+		DA25508516D9241400BB33EB /* SpotlightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightViewController.h; sourceTree = "<group>"; };
+		DA25508616D9241400BB33EB /* SpotlightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightViewController.m; sourceTree = "<group>"; };
 		FF73F217AEFF401EB2608E7E /* Pods-SampleAppTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleAppTests.xcconfig"; path = "Pods/Pods-SampleAppTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -153,6 +156,8 @@
 			children = (
 				DA25508216D921A900BB33EB /* RootTableViewController.h */,
 				DA25508316D921A900BB33EB /* RootTableViewController.m */,
+				DA25508516D9241400BB33EB /* SpotlightViewController.h */,
+				DA25508616D9241400BB33EB /* SpotlightViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				DA25503E16D91EE500BB33EB /* main.m in Sources */,
 				DA25504216D91EE500BB33EB /* AppDelegate.m in Sources */,
 				DA25508416D921A900BB33EB /* RootTableViewController.m in Sources */,
+				DA25508716D9241400BB33EB /* SpotlightViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
