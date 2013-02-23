@@ -1,4 +1,4 @@
-//  AppDelegate.m
+//  FocalViewsTableViewController.h
 //
 //  Copyright (c) 2013 modocache
 //
@@ -23,25 +23,9 @@
 //
 
 
-#import "AppDelegate.h"
-#import "RootTableViewController.h"
+#import <UIKit/UIKit.h>
 
 
-@implementation AppDelegate
-
-
-#pragma mark - UIApplicationDelegate Protocol Methods
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-
-    UINavigationController *navigationController =
-        [[UINavigationController alloc] initWithRootViewController:[RootTableViewController new]];
-    self.window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    return YES;
-}
+@interface RootTableViewController : UITableViewController
 
 @end
