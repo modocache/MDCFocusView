@@ -26,11 +26,45 @@
 #import "SpotlightViewController.h"
 
 
+static CGFloat const kSpotlightViewControllerButtonHeight = 50.0f;
+static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
+
+
 @interface SpotlightViewController ()
 
 @end
 
 
 @implementation SpotlightViewController
+
+
+#pragma mark - UIViewController Overrides
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view addSubview:[self buildButton]];
+}
+
+
+#pragma mark - Internal Methods
+
+- (UIButton *)buildButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(floorf((self.view.frame.size.width - kSpotlightViewControllerButtonWidth)/2),
+                              floorf((self.view.frame.size.height - kSpotlightViewControllerButtonWidth)/2),
+                              kSpotlightViewControllerButtonWidth,
+                              kSpotlightViewControllerButtonHeight);
+
+    [button setTitle:@"Press Me!" forState:UIControlStateNormal];
+    [button addTarget:self
+               action:@selector(onButtonTapped:)
+     forControlEvents:UIControlEventTouchUpInside];
+
+    return button;
+}
+
+- (void)onButtonTapped:(UIButton *)sender {
+    NSLog(@"%@:%@", [self class], NSStringFromSelector(_cmd));
+}
 
 @end
