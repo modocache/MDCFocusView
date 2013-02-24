@@ -20,6 +20,12 @@
 		DA25505A16D91EE600BB33EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA25505816D91EE600BB33EB /* InfoPlist.strings */; };
 		DA25508416D921A900BB33EB /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508316D921A900BB33EB /* RootTableViewController.m */; };
 		DA25508716D9241400BB33EB /* SpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508616D9241400BB33EB /* SpotlightViewController.m */; };
+		DA25508F16D92E6700BB33EB /* MDCFocalPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508A16D92E6700BB33EB /* MDCFocalPointView.m */; };
+		DA25509016D92E6700BB33EB /* MDCFocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508C16D92E6700BB33EB /* MDCFocusView.m */; };
+		DA25509116D92E6700BB33EB /* MDCSpotlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25508E16D92E6700BB33EB /* MDCSpotlightView.m */; };
+		DA25509716D970BC00BB33EB /* MDCFocusViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25509616D970BC00BB33EB /* MDCFocusViewSpec.m */; };
+		DA25509816D9772100BB33EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA25503516D91EE500BB33EB /* CoreGraphics.framework */; };
+		DA25509A16D97FB300BB33EB /* MDCFocalPointViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA25509916D97FB300BB33EB /* MDCFocalPointViewSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +58,14 @@
 		DA25508316D921A900BB33EB /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
 		DA25508516D9241400BB33EB /* SpotlightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightViewController.h; sourceTree = "<group>"; };
 		DA25508616D9241400BB33EB /* SpotlightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightViewController.m; sourceTree = "<group>"; };
+		DA25508916D92E6700BB33EB /* MDCFocalPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCFocalPointView.h; sourceTree = "<group>"; };
+		DA25508A16D92E6700BB33EB /* MDCFocalPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCFocalPointView.m; sourceTree = "<group>"; };
+		DA25508B16D92E6700BB33EB /* MDCFocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCFocusView.h; sourceTree = "<group>"; };
+		DA25508C16D92E6700BB33EB /* MDCFocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCFocusView.m; sourceTree = "<group>"; };
+		DA25508D16D92E6700BB33EB /* MDCSpotlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSpotlightView.h; sourceTree = "<group>"; };
+		DA25508E16D92E6700BB33EB /* MDCSpotlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCSpotlightView.m; sourceTree = "<group>"; };
+		DA25509616D970BC00BB33EB /* MDCFocusViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCFocusViewSpec.m; sourceTree = "<group>"; };
+		DA25509916D97FB300BB33EB /* MDCFocalPointViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCFocalPointViewSpec.m; sourceTree = "<group>"; };
 		FF73F217AEFF401EB2608E7E /* Pods-SampleAppTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleAppTests.xcconfig"; path = "Pods/Pods-SampleAppTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -70,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA25509816D9772100BB33EB /* CoreGraphics.framework in Frameworks */,
 				DA25505016D91EE600BB33EB /* SenTestingKit.framework in Frameworks */,
 				DA25505116D91EE600BB33EB /* UIKit.framework in Frameworks */,
 				DA25505216D91EE600BB33EB /* Foundation.framework in Frameworks */,
@@ -115,6 +130,7 @@
 		DA25503716D91EE500BB33EB /* SampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				DA25508816D92E6700BB33EB /* MDCFocusView */,
 				DA25504016D91EE500BB33EB /* AppDelegate.h */,
 				DA25504116D91EE500BB33EB /* AppDelegate.m */,
 				DA25508116D9216100BB33EB /* Controllers */,
@@ -137,6 +153,7 @@
 		DA25505516D91EE600BB33EB /* SampleAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA25509516D970AF00BB33EB /* MDCFocusViewTests */,
 				DA25505616D91EE600BB33EB /* Supporting Files */,
 			);
 			path = SampleAppTests;
@@ -161,6 +178,28 @@
 			);
 			path = Controllers;
 			sourceTree = "<group>";
+		};
+		DA25508816D92E6700BB33EB /* MDCFocusView */ = {
+			isa = PBXGroup;
+			children = (
+				DA25508B16D92E6700BB33EB /* MDCFocusView.h */,
+				DA25508C16D92E6700BB33EB /* MDCFocusView.m */,
+				DA25508916D92E6700BB33EB /* MDCFocalPointView.h */,
+				DA25508A16D92E6700BB33EB /* MDCFocalPointView.m */,
+				DA25508D16D92E6700BB33EB /* MDCSpotlightView.h */,
+				DA25508E16D92E6700BB33EB /* MDCSpotlightView.m */,
+			);
+			path = MDCFocusView;
+			sourceTree = SOURCE_ROOT;
+		};
+		DA25509516D970AF00BB33EB /* MDCFocusViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA25509616D970BC00BB33EB /* MDCFocusViewSpec.m */,
+				DA25509916D97FB300BB33EB /* MDCFocalPointViewSpec.m */,
+			);
+			path = MDCFocusViewTests;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -287,6 +326,9 @@
 				DA25504216D91EE500BB33EB /* AppDelegate.m in Sources */,
 				DA25508416D921A900BB33EB /* RootTableViewController.m in Sources */,
 				DA25508716D9241400BB33EB /* SpotlightViewController.m in Sources */,
+				DA25508F16D92E6700BB33EB /* MDCFocalPointView.m in Sources */,
+				DA25509016D92E6700BB33EB /* MDCFocusView.m in Sources */,
+				DA25509116D92E6700BB33EB /* MDCSpotlightView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +336,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA25509716D970BC00BB33EB /* MDCFocusViewSpec.m in Sources */,
+				DA25509A16D97FB300BB33EB /* MDCFocalPointViewSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

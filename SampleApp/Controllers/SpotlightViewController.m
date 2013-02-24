@@ -25,13 +25,17 @@
 
 #import "SpotlightViewController.h"
 
+#import "MDCFocusView.h"
+#import "MDCSpotlightView.h"
+
 
 static CGFloat const kSpotlightViewControllerButtonHeight = 50.0f;
 static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
 
 @interface SpotlightViewController ()
-
+@property (nonatomic, strong) MDCFocusView *focusView;
+@property (nonatomic, strong) UIButton *button;
 @end
 
 
@@ -42,7 +46,23 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:[self buildButton]];
+
+    self.button = [self buildButton];
+    [self.view addSubview:self.button];
+
+    self.focusView = [[MDCFocusView alloc] initWithFrame:self.view.bounds];
+    self.focusView.backgroundColor = [UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f];
+    self.focusView.focalPointViewClass = [MDCSpotlightView class];
+    [self.view addSubview:self.focusView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.focusView focus:self.button, nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.focusView dismiss];
 }
 
 
@@ -64,7 +84,7 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 }
 
 - (void)onButtonTapped:(UIButton *)sender {
-    NSLog(@"%@:%@", [self class], NSStringFromSelector(_cmd));
+    [self.focusView dismiss];
 }
 
 @end
