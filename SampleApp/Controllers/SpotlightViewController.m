@@ -62,7 +62,9 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.focusView dismiss];
+    if (self.focusView.isFocused) {
+        [self.focusView dismiss];
+    }
 }
 
 
@@ -84,7 +86,9 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 }
 
 - (void)onButtonTapped:(UIButton *)sender {
-    [self.focusView dismiss];
+    if (self.focusView.isFocused) {
+        [self.focusView dismiss];
+    }
 }
 
 @end
