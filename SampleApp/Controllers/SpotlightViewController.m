@@ -29,6 +29,7 @@
 #import "MDCSpotlightView.h"
 
 
+static CGFloat const kSpotlightViewControllerButtonMargin = 70.0f;
 static CGFloat const kSpotlightViewControllerButtonHeight = 50.0f;
 static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
@@ -36,6 +37,8 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 @interface SpotlightViewController ()
 @property (nonatomic, strong) MDCFocusView *focusView;
 @property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UIButton *bottomButton;
+@property (nonatomic, strong) UIBarButtonItem *doneButton;
 @end
 
 
@@ -47,18 +50,24 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.button = [self buildButton];
+    self.button = [self buildButton:0];
     [self.view addSubview:self.button];
 
-    self.focusView = [[MDCFocusView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:[self buildButton:1]];
+
+    self.bottomButton = [self buildButton:2];
+    [self.view addSubview:self.bottomButton];
+
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    self.focusView = [[MDCFocusView alloc] initWithFrame:keyWindow.frame];
     self.focusView.backgroundColor = [UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f];
     self.focusView.focalPointViewClass = [MDCSpotlightView class];
-    [self.view addSubview:self.focusView];
+    [keyWindow addSubview:self.focusView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.focusView focus:self.button, nil];
+    [self.focusView focus:self.button, self.bottomButton, self.doneButton, nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -70,10 +79,13 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
 #pragma mark - Internal Methods
 
-- (UIButton *)buildButton {
+- (UIButton *)buildButton:(NSUInteger)buttonIndex {
+    CGFloat buttonOriginY = kSpotlightViewControllerButtonMargin +
+                            (buttonIndex * (kSpotlightViewControllerButtonHeight + kSpotlightViewControllerButtonMargin));
+
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(floorf((self.view.frame.size.width - kSpotlightViewControllerButtonWidth)/2),
-                              floorf((self.view.frame.size.height - kSpotlightViewControllerButtonWidth)/2),
+                              buttonOriginY,
                               kSpotlightViewControllerButtonWidth,
                               kSpotlightViewControllerButtonHeight);
 

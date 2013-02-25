@@ -96,9 +96,13 @@
     self.focused = YES;
 
     NSMutableArray *focii = [NSMutableArray arrayWithCapacity:[views count]];
+
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     for (UIView *view in views) {
         MDCFocalPointView *focalPointView = [[self.focalPointViewClass alloc] initWithFocalView:view];
         [self addSubview:focalPointView];
+        focalPointView.frame = [keyWindow convertRect:focalPointView.frame fromView:focalPointView.focalView.superview];
+
         [focii addObject:focalPointView];
     }
 
