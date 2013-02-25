@@ -116,7 +116,7 @@
     }];
 }
 
-- (void)dismiss {
+- (void)dismiss:(void (^)())completion {
     NSAssert(self.focused, @"Cannot dismiss when focus is not applied in the first place.");
 
     [UIView animateWithDuration:self.focusDuration animations:^{
@@ -130,6 +130,10 @@
         self.userInteractionEnabled = NO;
         self.focused = NO;
         [self setNeedsDisplay];
+
+        if (completion) {
+            completion();
+        }
     }];
 }
 

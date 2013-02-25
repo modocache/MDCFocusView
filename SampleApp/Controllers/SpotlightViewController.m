@@ -58,10 +58,20 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
     self.bottomButton = [self buildButton:2];
     [self.view addSubview:self.bottomButton];
 
+    // First, initialize MDCFocusView using the window's bounds
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     self.focusView = [[MDCFocusView alloc] initWithFrame:keyWindow.frame];
-    self.focusView.backgroundColor = [UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f];
+
+    // Customize background
+    self.focusView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f];
+
+    // Register a MDCFocalPointView subclass to "wrap" focal points
     self.focusView.focalPointViewClass = [MDCSpotlightView class];
+
+    // Add any number of custom views to MDCFocusView
+    [self.focusView addSubview:[self buildLabel]];
+
+    // Finally, add MDCFocusView to window
     [keyWindow addSubview:self.focusView];
 }
 
@@ -72,7 +82,11 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.focusView.isFocused) {
-        [self.focusView dismiss];
+        [self.focusView dismiss:^{
+            [self.focusView removeFromSuperview];
+        }];
+    } else {
+        [self.focusView removeFromSuperview];
     }
 }
 
@@ -97,9 +111,23 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
     return button;
 }
 
+- (UILabel *)buildLabel {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 200, 300)];
+    label.numberOfLines = 10;
+    label.font = [UIFont boldSystemFontOfSize:16.0f];
+    label.shadowColor = [UIColor grayColor];
+    label.shadowOffset = CGSizeMake(0, 1);
+    label.text = @"Press one of the buttons. All controls outside of the highlighted "
+                 @"buttons cannot be tapped.";
+    label.textColor = [UIColor whiteColor];
+    label.backgroundColor = [UIColor clearColor];
+
+    return label;
+}
+
 - (void)onButtonTapped:(UIButton *)sender {
     if (self.focusView.isFocused) {
-        [self.focusView dismiss];
+        [self.focusView dismiss:nil];
     }
 }
 

@@ -34,6 +34,6 @@
 
 - (void)focus:(UIView *)views, ... NS_REQUIRES_NIL_TERMINATION;
 - (void)focusOnViews:(NSArray *)views;
-- (void)dismiss;
+- (void)dismiss:(void (^)())completion;
 
 @end

@@ -112,7 +112,7 @@ describe(@"MDCFocusView", ^{
         context(@"when not focused in the first place", ^{
             it(@"raises", ^{
                 [[theBlock(^{
-                    [focusView dismiss];
+                    [focusView dismiss:nil];
                 }) should] raiseWithName:NSInternalInconsistencyException
                                   reason:@"Cannot dismiss when focus is not applied "
                                          @"in the first place."];
@@ -127,13 +127,23 @@ describe(@"MDCFocusView", ^{
             it(@"stops swallowing touches", ^{
                 [[focusView shouldEventually] receive:@selector(setUserInteractionEnabled:)
                                         withArguments:theValue(NO)];
-                [focusView dismiss];
+                [focusView dismiss:nil];
             });
 
             it(@"loses focus", ^{
                 [[focusView shouldEventually] receive:@selector(setFocused:)
                                         withArguments:theValue(NO)];
-                [focusView dismiss];
+                [focusView dismiss:nil];
+            });
+
+            context(@"when a completion block is provided", ^{
+                it(@"calls the block", ^{
+                    [[focusView shouldEventually] receive:@selector(removeFromSuperview)];
+
+                    [focusView dismiss:^{
+                        [focusView removeFromSuperview];
+                    }];
+                });
             });
         });
     });
