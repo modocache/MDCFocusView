@@ -38,7 +38,7 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 @property (nonatomic, strong) MDCFocusView *focusView;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIButton *bottomButton;
-@property (nonatomic, strong) UIBarButtonItem *doneButton;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @end
 
 
@@ -50,13 +50,8 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.button = [self buildButton:0];
-    [self.view addSubview:self.button];
-
-    [self.view addSubview:[self buildButton:1]];
-
-    self.bottomButton = [self buildButton:2];
-    [self.view addSubview:self.bottomButton];
+    [self setupButtons];
+    [self setupSegmentedControl];
 
     // Initialize MDCFocusView and customize its background color
     self.focusView = [MDCFocusView new];
@@ -71,7 +66,7 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.focusView focus:self.button, self.bottomButton, self.doneButton, nil];
+    [self.focusView focus:self.button, self.bottomButton, self.segmentedControl, nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -84,6 +79,25 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
 
 #pragma mark - Internal Methods
+
+- (void)setupButtons {
+    self.button = [self buildButton:0];
+    [self.view addSubview:self.button];
+
+    [self.view addSubview:[self buildButton:1]];
+
+    self.bottomButton = [self buildButton:2];
+    [self.view addSubview:self.bottomButton];
+}
+
+- (void)setupSegmentedControl {
+    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[ @"Hello", @"Focus" ]];
+    self.segmentedControl.frame = CGRectMake(self.bottomButton.frame.origin.x - 25.0f,
+                                             self.bottomButton.frame.origin.y + self.bottomButton.frame.size.height + 200,
+                                             200.0f, 50.0f);
+    self.segmentedControl.selectedSegmentIndex = 0;
+    [self.view addSubview:self.segmentedControl];
+}
 
 - (UIButton *)buildButton:(NSUInteger)buttonIndex {
     CGFloat buttonOriginY = kSpotlightViewControllerButtonMargin +
