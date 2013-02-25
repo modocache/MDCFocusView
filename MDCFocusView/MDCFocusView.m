@@ -40,8 +40,9 @@
 
 #pragma mark - Object Initialization
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)init {
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    self = [super initWithFrame:keyWindow.frame];
     if (self) {
         _focusDuration = 0.5;
         _focalPointViewClass = [MDCFocalPointView class];
@@ -104,8 +105,10 @@
 - (void)focusOnViews:(NSArray *)views {
     NSParameterAssert(views != nil);
 
-    [self adjustRotation];
     self.focused = YES;
+
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [self adjustRotation];
 
     NSMutableArray *focii = [NSMutableArray arrayWithCapacity:[views count]];
 
@@ -140,8 +143,9 @@
         self.focii = nil;
 
         self.userInteractionEnabled = NO;
+        [self removeFromSuperview];
+
         self.focused = NO;
-        [self setNeedsDisplay];
 
         if (completion) {
             completion();

@@ -34,10 +34,10 @@ SPEC_BEGIN(MDCFocusViewSpec)
 describe(@"MDCFocusView", ^{
     __block MDCFocusView *focusView = nil;
     beforeEach(^{
-        focusView = [[MDCFocusView alloc] initWithFrame:CGRectZero];
+        focusView = [MDCFocusView new];
     });
 
-    describe(@"-initWithFrame:", ^{
+    describe(@"-init", ^{
         it(@"is hidden", ^{
             [[theValue(focusView.alpha) should] equal:theValue(0.0f)];
         });
@@ -134,16 +134,6 @@ describe(@"MDCFocusView", ^{
                 [[focusView shouldEventually] receive:@selector(setFocused:)
                                         withArguments:theValue(NO)];
                 [focusView dismiss:nil];
-            });
-
-            context(@"when a completion block is provided", ^{
-                it(@"calls the block", ^{
-                    [[focusView shouldEventually] receive:@selector(removeFromSuperview)];
-
-                    [focusView dismiss:^{
-                        [focusView removeFromSuperview];
-                    }];
-                });
             });
         });
     });

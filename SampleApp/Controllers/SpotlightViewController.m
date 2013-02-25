@@ -58,11 +58,8 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
     self.bottomButton = [self buildButton:2];
     [self.view addSubview:self.bottomButton];
 
-    // First, initialize MDCFocusView using the window's bounds
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    self.focusView = [[MDCFocusView alloc] initWithFrame:keyWindow.frame];
-
-    // Customize background
+    // Initialize MDCFocusView and customize its background color
+    self.focusView = [MDCFocusView new];
     self.focusView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f];
 
     // Register a MDCFocalPointView subclass to "wrap" focal points
@@ -70,9 +67,6 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 
     // Add any number of custom views to MDCFocusView
     [self.focusView addSubview:[self buildLabel]];
-
-    // Finally, add MDCFocusView to window
-    [keyWindow addSubview:self.focusView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -84,11 +78,7 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
     [super viewWillDisappear:animated];
 
     if (self.focusView.isFocused) {
-        [self.focusView dismiss:^{
-            [self.focusView removeFromSuperview];
-        }];
-    } else {
-        [self.focusView removeFromSuperview];
+        [self.focusView dismiss:nil];
     }
 }
 
