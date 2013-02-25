@@ -81,6 +81,8 @@ static CGFloat const kSpotlightViewControllerButtonWidth = 150.0f;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
     if (self.focusView.isFocused) {
         [self.focusView dismiss:^{
             [self.focusView removeFromSuperview];

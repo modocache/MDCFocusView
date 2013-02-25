@@ -49,8 +49,19 @@
         self.userInteractionEnabled = NO;
         self.opaque = NO;
         self.alpha = 0.0f;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onApplicationDidChangeStatusBarOrientationNotification:)
+                                                     name:UIApplicationDidChangeStatusBarOrientationNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidChangeStatusBarOrientationNotification
+                                                  object:nil];
 }
 
 
@@ -93,15 +104,16 @@
 - (void)focusOnViews:(NSArray *)views {
     NSParameterAssert(views != nil);
 
+    [self adjustRotation];
     self.focused = YES;
 
     NSMutableArray *focii = [NSMutableArray arrayWithCapacity:[views count]];
 
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     for (UIView *view in views) {
         MDCFocalPointView *focalPointView = [[self.focalPointViewClass alloc] initWithFocalView:view];
         [self addSubview:focalPointView];
-        focalPointView.frame = [keyWindow convertRect:focalPointView.frame fromView:focalPointView.focalView.superview];
+        focalPointView.frame = [self convertRect:focalPointView.frame
+                                        fromView:focalPointView.focalView.superview];
 
         [focii addObject:focalPointView];
     }
@@ -117,7 +129,7 @@
 }
 
 - (void)dismiss:(void (^)())completion {
-    NSAssert(self.focused, @"Cannot dismiss when focus is not applied in the first place.");
+    NSAssert(self.isFocused, @"Cannot dismiss when focus is not applied in the first place.");
 
     [UIView animateWithDuration:self.focusDuration animations:^{
         self.alpha = 0.0f;
@@ -135,6 +147,48 @@
             completion();
         }
     }];
+}
+
+
+#pragma mark - Internal Methods
+
+- (void)onApplicationDidChangeStatusBarOrientationNotification:(NSNotification *)notification {
+    if (!self.isFocused) {
+        return;
+    }
+
+    NSMutableArray *views = [NSMutableArray new];
+    for (MDCFocalPointView *focalPointView in self.focii) {
+        [views addObject:focalPointView.focalView];
+    }
+
+    [self dismiss:^{
+        [self adjustRotation];
+        [self focusOnViews:[views copy]];
+    }];
+}
+
+- (void)adjustRotation {
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+
+    CGFloat rotationAngle = 0.0f;
+    switch (orientation) {
+        case UIInterfaceOrientationPortrait:
+            rotationAngle = 0.0f;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            rotationAngle = M_PI;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            rotationAngle = -M_PI/2.0f;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            rotationAngle = M_PI/2.0f;
+            break;
+    }
+
+    self.transform = CGAffineTransformMakeRotation(rotationAngle);
+    self.frame = self.superview.frame;
 }
 
 @end
