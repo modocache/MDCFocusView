@@ -12,7 +12,7 @@ Check out [a demo on Vimeo](http://vimeo.com/60418239).
 
 ## How to Use
 
-You can install the project using Cocoapods, by placing `pod MDCFocusView`
+You can install the project using CocoaPods, by placing `pod MDCFocusView`
 in your `Podfile`. After installing:
 
 ```objc
